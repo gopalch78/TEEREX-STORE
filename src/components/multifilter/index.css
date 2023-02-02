@@ -1,0 +1,117 @@
+.list-style {
+  list-style-type: none;
+}
+.card-body{
+  text-align: left !important;
+}
+#cart-list {
+  padding-top: 20px;
+  text-align: -webkit-center;
+}
+.cart-button {
+  border: 1px solid lightgray;
+  border-radius: 10%;
+  color: white;
+  background-color: orange;
+  width: 110px;
+  height: 30px;
+}
+.card-background {
+  box-shadow: 0 3px 12px #0000001a;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 30px;
+  height: 320px;
+  width: 200px;
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 20px;
+  background: lightcyan;
+}
+
+.search-input {
+  width: 300px;
+  border: 1px solid whitesmoke;
+}
+.search-box {
+  background-color: lightgrey;
+}
+
+.filter-paper {
+  box-shadow: 0 3px 12px #0000001a;
+  padding: 21px 30px;
+
+  background-color: #fff;
+  margin-bottom: 40px;
+}
+
+.unOrder-list-container {
+  list-style-type: none;
+  margin-right: 20px;
+}
+
+.unOrder-list-container {
+  list-style-type: none;
+  margin-right: 20px;
+}
+
+.wrap-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.label-element {
+  margin-left: 5px;
+}
+.filter-heading {
+  padding-top: 5px;
+}
+
+.car-item {
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+  background-color: #fafafa;
+  border: 1px solid black;
+  padding: 10px;
+  gap: 5px;
+  text-align: left;
+}
+.filter-option,
+.active-option {
+  padding: 10px 20px;
+  min-width: 50px;
+  border-radius: 2rem;
+}
+
+.filter-container {
+  background-color: lightgreen;
+  padding: 10px 10px;
+}
+.form-control {
+  display: initial !important;
+}
+#brand-input {
+  width: 80px;
+  height: 40px;
+}
+.filter-option:hover,
+.active-option {
+  background-color: #48b393;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: all 0.1s;
+}
+.select-alignment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.quantity{
+  display: flex;
+}

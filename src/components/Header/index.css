@@ -1,0 +1,8 @@
+.header{
+background: #13253a;
+}
+
+.navbar-text a{
+    color: white !important;
+    text-decoration: none !important;
+}
