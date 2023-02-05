@@ -2,23 +2,12 @@ import { useEffect, useState, useContext } from "react";
 import "./index.css";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import { Cartcontext } from "../../context/Context";
-export default function UseCaseLiveFilter() {
-  // const [overrideQuantities, setOverrideQuantities] = useState({});
-  // const [errors, setErrors] = useState({});
 
-  // const handleQuantityChange = (event, id) => {
-  //   setOverrideQuantities({ ...overrideQuantities, [id]: event.target.value });
-
-  //   if (event.target.value > items.find(item => item.id === id).predefinedQuantity) {
-  //     setErrors({ ...errors, [id]: "Quantity can't be greater than predefined quantity." });
-  //   } else {
-  //     setErrors({ ...errors, [id]: '' });
-  //   }
-  // };
-
+export default function Home() {
+  // State for Storing Data
   const [data, setData] = useState([]);
 
-  // Array of all car objects
+  // url  in json format
   const url =
     "https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json";
 
@@ -28,6 +17,7 @@ export default function UseCaseLiveFilter() {
       .then((data) => setData(data));
   }, []);
 
+  // states for filtered data, color,price,gender and type with  search query
   const [filteredList, setFilteredList] = useState(data);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -37,6 +27,8 @@ export default function UseCaseLiveFilter() {
 
   const Globalstate = useContext(Cartcontext);
   const dispatch = Globalstate.dispatch;
+
+  // Filter for Color
 
   const filterByColor = (filteredData) => {
     // Avoid filter for empty string
@@ -50,6 +42,7 @@ export default function UseCaseLiveFilter() {
     return filteredColors;
   };
 
+  // Filter for Gender
   const filterByGender = (filteredData) => {
     // Avoid filter for empty string
     if (!selectedGender) {
@@ -62,7 +55,7 @@ export default function UseCaseLiveFilter() {
 
     return filteredGender;
   };
-
+  // Filter for Type
   const filterByType = (filteredData) => {
     // Avoid filter for empty string
     if (!selectedType) {
@@ -74,7 +67,7 @@ export default function UseCaseLiveFilter() {
     );
     return filteredType;
   };
-
+  // Filter for Prce
   const filterByPrice = (filteredData) => {
     // Avoid filter for null value
     if (!selectedPrice) {
@@ -87,18 +80,20 @@ export default function UseCaseLiveFilter() {
     return filteredPrice;
   };
 
+  // Handle Change for Color
   const handleColorChange = (event) => {
     setSelectedColor(event.target.value);
   };
-
+  // Handle Change for Gender
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
   };
-
+  // Handle Change for Type
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
   };
 
+  // Handle Change for Price
   const handlePriceChange = (event) => {
     const inputYear = Number(event.target.id);
 
@@ -109,6 +104,7 @@ export default function UseCaseLiveFilter() {
     }
   };
 
+  // UseEffect for multiple filters
   useEffect(() => {
     var filteredData = filterByColor(data);
     filteredData = filterByPrice(filteredData);
@@ -117,6 +113,7 @@ export default function UseCaseLiveFilter() {
     setFilteredList(filteredData);
   }, [selectedColor, selectedPrice, selectedGender, selectedType, data]);
 
+  // Search filter with input type= searchf
   const searchData = data.filter(
     (each) =>
       each.name.toLowerCase().includes(query) ||
@@ -128,11 +125,10 @@ export default function UseCaseLiveFilter() {
     setQuery(e.target.value);
   };
 
-  // context
-
   return (
     <div>
       <div className="search-container">
+        {/* INPUT */}
         <input
           type="search"
           placeholder="Search"
@@ -147,6 +143,7 @@ export default function UseCaseLiveFilter() {
             <Col lg={3} md={6} sm={6}>
               <div className="select-alignment">
                 <h6 className="text-center pt-2 pb-2">Filter by Color </h6>
+                {/* DropDown for Color */}
                 <select
                   id="brand-input"
                   value={selectedColor}
@@ -170,6 +167,7 @@ export default function UseCaseLiveFilter() {
             <Col lg={3} md={6} sm={6}>
               <div className="select-alignment">
                 <h6 className="text-center pt-2 pb-2">Filter by Gender</h6>
+                {/* DropDown for Gender */}
                 <select
                   id="brand-input"
                   value={selectedGender}
@@ -185,6 +183,7 @@ export default function UseCaseLiveFilter() {
             <Col lg={3} md={6} sm={6}>
               <div className="select-alignment">
                 <h6 className="text-center pt-2 pb-2">Filter by Type</h6>
+                {/* DropDown for Type */}
                 <select
                   id="brand-input"
                   value={selectedType}
@@ -200,6 +199,7 @@ export default function UseCaseLiveFilter() {
             </Col>
             <Col lg={3} md={6} sm={6}>
               <h6 className="text-center pt-2 pb-2">Filter by Price</h6>
+              {/* DropDown for Price */}
               <div
                 className="d-flex justify-content-center"
                 onClick={handlePriceChange}
@@ -296,15 +296,17 @@ export default function UseCaseLiveFilter() {
                     alt="not found"
                   />
 
-                  <p className="pt-3"><b>No Products Found.Try Other Filters</b></p>
+                  <p className="pt-3">
+                    <b>No Products Found.Try Other Filters</b>
+                  </p>
                 </div>
               )
             ) : searchData.length === 0 ? (
               <div className=" text-center pt-4">
-                 <img
-                    src="https://res.cloudinary.com/nsp/image/upload/v1635664104/tastyKitchens/error_1x_csgpog.png"
-                    alt="not found"
-                  />
+                <img
+                  src="https://res.cloudinary.com/nsp/image/upload/v1635664104/tastyKitchens/error_1x_csgpog.png"
+                  alt="not found"
+                />
                 <h1>No Products Found</h1>
                 <p>
                   We could not find any Products for you and Try other filters.

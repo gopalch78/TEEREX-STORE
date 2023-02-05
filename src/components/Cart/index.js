@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext} from "react";
 import { Cartcontext } from "../../context/Context";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const Cart = () => {
   const dispatch = Globalstate.dispatch;
 
   const total = state.reduce((total, item) => {
-    return total + item.price * item.quantity;
+    return total + item.price * item.currentQuantity;
   }, 0);
 
   return (
@@ -57,14 +57,23 @@ const Cart = () => {
                                 <b>{each.name}</b>
                               </Card.Title>
                               <Card.Text style={{ color: "red" }}>
-                                <b>Rs.{each.quantity * each.price}</b>
+                                <b>Rs.{each.currentQuantity* each.price}</b>
                               </Card.Text>
 
                               <div className="quantity ">
                                 <button
                                   className="cart-button-plus-minus"
                                   onClick={() => {
-                               
+                                    let ind = state.findIndex(
+                                      (e) => e.currentQuantity >= e.quantity
+                                    );
+                                    console.log(ind)
+                                    if (ind !== -1) {
+                                      alert(
+                                        "Item quantity limit has exceeded "
+                                      );
+                                      return;
+                                    }
                                     dispatch({
                                       type: "INCREASE",
                                       payload: each,
@@ -74,12 +83,12 @@ const Cart = () => {
                                   +
                                 </button>
                                 <p className=" p-1">
-                                  <b>{each.quantity}</b>
+                                  <b>{each.currentQuantity}</b>
                                 </p>
                                 <button
                                   className="cart-button-plus-minus"
                                   onClick={() => {
-                                    if (each.quantity > 1) {
+                                    if (each.currentQuantity > 1) {
                                       dispatch({
                                         type: "DECREASE",
                                         payload: each,

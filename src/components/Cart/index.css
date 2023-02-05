@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.cart-empty-img{
+  width: 200px;
+  height: 100%;
+}
 .cart-image {
   height: 250px;
   width: 250px;
